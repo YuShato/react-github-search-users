@@ -8,7 +8,6 @@ const Navbar = () => {
     loginWithRedirect,
     logout,
     user,
-    isLoading
   } = useAuth0()
 
   const isUser = isAuthenticated && user
@@ -24,7 +23,7 @@ const Navbar = () => {
       {isUser ? (
         <button
           onClick={() => {
-            logout({ returnTo: window.location.origin })
+            logout({ returnTo: window.location.origin });
           }}
         >
           logout
@@ -33,8 +32,8 @@ const Navbar = () => {
         <button onClick={loginWithRedirect}>login</button>
       )}
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.nav`
   padding: 1.5rem;
