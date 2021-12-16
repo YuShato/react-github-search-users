@@ -2,7 +2,7 @@ import React from 'react'
 import { Dashboard, Login, PrivateRoute, AuthWrapper, Error } from './pages'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-function App() {
+function App () {
   return (
     <AuthWrapper>
       <Router>
@@ -19,7 +19,7 @@ function App() {
         </Switch>
       </Router>
     </AuthWrapper>
-  );
+  )
 }
 
 export default App

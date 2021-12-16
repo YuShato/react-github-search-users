@@ -4,7 +4,6 @@ import loadingImage from '../images/preloader.gif'
 import { GithubContext } from '../context/context'
 const Dashboard = () => {
   const { isLoading } = React.useContext(GithubContext)
-
   if (isLoading) {
     return (
       <main>
@@ -16,7 +15,8 @@ const Dashboard = () => {
   }
   return (
     <main>
-      <Navbar> </Navbar> <Search />
+      <Navbar></Navbar>
+      <Search />
       <Info />
       <User />
       <Repos />
