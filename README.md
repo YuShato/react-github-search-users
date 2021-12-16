@@ -5,6 +5,6 @@
 
 ### Используемые технологии
  - Styled Component
- -React
- -Github API
- -Auth0
+ - React
+ - Github API
+ - Auth0
