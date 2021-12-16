@@ -8,16 +8,21 @@ const rootUrl = 'https://api.github.com'
 
 const GithubContext = React.createContext()
 
+// Provider, Consumer - GithubContext.Provider
+
 const GithubProvider = ({ children }) => {
   const [githubUser, setGithubUser] = useState(mockUser)
   const [repos, setRepos] = useState(mockRepos)
   const [followers, setFollowers] = useState(mockFollowers)
+  // request loading
   const [requests, setRequests] = useState(0)
-  const [isLoading, setIsloading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  // error
   const [error, setError] = useState({ show: false, msg: '' })
 
   const searchGithubUser = async user => {
     toggleError()
+    setIsLoading(true)
     const response = await axios(`${rootUrl}/users/${user}`).catch(err =>
       console.log(err)
     )
@@ -41,12 +46,13 @@ const GithubProvider = ({ children }) => {
         })
         .catch(err => console.log(err))
     } else {
-      toggleError(true, 'There is no user with that username')
+      toggleError(true, 'there is no user with that username')
     }
     checkRequests()
-    setIsloading(false)
+    setIsLoading(false)
   }
 
+  //  check rate
   const checkRequests = () => {
     axios(`${rootUrl}/rate_limit`)
       .then(({ data }) => {
@@ -60,16 +66,15 @@ const GithubProvider = ({ children }) => {
       })
       .catch(err => console.log(err))
   }
-
-  const toggleError = (show = false, msg = '') => {
+  function toggleError (show = false, msg = '') {
     setError({ show, msg })
   }
-
+  // error
+  useEffect(checkRequests, [])
+  // get initial user
   useEffect(() => {
-    checkRequests()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    searchGithubUser('john-smilga')
   }, [])
-
   return (
     <GithubContext.Provider
       value={{
